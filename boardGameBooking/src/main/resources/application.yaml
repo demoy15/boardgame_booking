@@ -1,1 +1,10 @@
-spring.application.name: boardGameBooking
+server:
+  port: 8081
+spring:
+  application:
+    name: catalog-svc
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /docs
