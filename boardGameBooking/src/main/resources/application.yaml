@@ -3,6 +3,15 @@ server:
 spring:
   application:
     name: catalog-svc
+  r2dbc:
+    url: r2dbc:postgresql://postgres:5432/catalog
+    username: postgres
+    password: postgres
+  sql:
+    init:
+      mode: always
+  liquibase:
+    enabled: false
 springdoc:
   api-docs:
     path: /v3/api-docs

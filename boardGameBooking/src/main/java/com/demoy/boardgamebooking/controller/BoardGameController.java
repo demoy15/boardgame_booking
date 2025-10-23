@@ -1,27 +1,34 @@
 package com.demoy.boardgamebooking.controller;
 
 
-import com.demoy.boardgamebooking.model.Game;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.demoy.boardgamebooking.dto.GameDto;
+import com.demoy.boardgamebooking.service.GameService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/catalog")
 public class BoardGameController {
 
+    private final GameService service;
 
     @GetMapping("/games")
-    public Flux<Game> games() {
-        List<Game> demo = List.of(
-                new Game(UUID.fromString("11111111-1111-1111-1111-111111111111"), "Catan", 3, 4, 90),
-                new Game(UUID.fromString("22222222-2222-2222-2222-222222222222"), "Wingspan", 1, 5, 80),
-                new Game(UUID.fromString("33333333-3333-3333-3333-333333333333"), "Ticket to Ride", 2, 5, 60)
-        );
-        return Flux.fromIterable(demo);
+    public Flux<GameDto> games() {
+        return service.getAll();
+    }
+
+    @PostMapping("/games")
+    public Mono<Void> create(@RequestBody GameDto dto) {
+        return service.create(dto);
+    }
+
+    @GetMapping("/games/{id}")
+    public Mono<GameDto> getById(@PathVariable UUID id) {
+        return service.getById(id);
     }
 }
