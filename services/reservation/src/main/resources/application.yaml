@@ -2,20 +2,19 @@ server:
   port: 8082
 spring:
   application:
-    name: catalog-svc
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5433/boardbox
-    username: postgres
-    password: postgres
-  datasource:
-    url: jdbc:postgresql://localhost:5433/boardbox
-    username: postgres
-    password: postgres
-  sql:
-    init:
-      mode: always
-  liquibase:
-    enabled: false
+    name: reservation
+  rabbitmq:
+    host: localhost
+    port: 5673
+    username: guest
+    password: guest
+  data:
+    redis:
+      host: redis
+      port: 6379
+reservation:
+  hold:
+    ttl-seconds: 900
 
 springdoc:
   api-docs:

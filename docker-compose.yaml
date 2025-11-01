@@ -1,0 +1,129 @@
+services:
+  db:
+    image: postgres:16
+    container_name: boardbox_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: boardbox
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./services/boardbox_catalog/src/main/resources/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d boardbox" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      - boardnet
+
+  redis:
+    image: redis:7
+    container_name: boardbox_redis
+    command: [ "redis-server", "--save", "", "--appendonly", "no" ]
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - boardnet
+
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redisinsight
+    ports:
+      - "5540:5540"
+    volumes:
+      - redisinsight_data:/data
+    networks:
+      - boardnet
+    depends_on:
+      - redis
+
+
+  rabbit:
+    image: rabbitmq:3.13-management
+    container_name: boardbox_rabbit
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5673:5673"
+      - "15673:15673"
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "status" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      - boardnet
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: boardbox_mailhog
+    ports:
+      - "8025:8025"
+    networks:
+      - boardnet
+
+  catalog:
+    build:
+      context: ./services/boardbox_catalog
+      dockerfile: Dockerfile
+    container_name: boardbox_catalog
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_R2DBC_URL: r2dbc:postgresql://db:5432/boardbox
+      SPRING_R2DBC_USERNAME: postgres
+      SPRING_R2DBC_PASSWORD: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/boardbox
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8081:8081"
+    networks:
+      - boardnet
+    restart: unless-stopped
+
+  reservation:
+    build:
+      context: ./services/reservation
+      dockerfile: Dockerfile
+    container_name: boardbox_reservation
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbit:
+        condition: service_healthy
+    environment:
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      SPRING_RABBITMQ_HOST: rabbit
+      SPRING_RABBITMQ_PORT: 5673
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      RESERVATION_HOLD_TTL_SECONDS: 900
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8082:8082"
+    networks:
+      - boardnet
+    restart: unless-stopped
+
+volumes:
+  db_data:
+  redisinsight_data:
+    driver: local
+
+networks:
+  boardnet:
+    driver: bridge
+

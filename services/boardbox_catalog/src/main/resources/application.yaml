@@ -1,14 +1,10 @@
 server:
-  port: 8082
+  port: 8081
 spring:
   application:
     name: catalog-svc
   r2dbc:
-    url: r2dbc:postgresql://localhost:5433/boardbox
-    username: postgres
-    password: postgres
-  datasource:
-    url: jdbc:postgresql://localhost:5433/boardbox
+    url: r2dbc:postgresql://db:5433/boardbox
     username: postgres
     password: postgres
   sql:

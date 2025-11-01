@@ -16,7 +16,7 @@ spec:
         - name: postgres
           image: postgres:16
           ports:
-            - containerPort: 5432
+            - containerPort: 5433
           env:
             - name: POSTGRES_USER
               value: "postgres"
@@ -42,8 +42,8 @@ metadata:
   name: postgres
 spec:
   ports:
-    - port: 5432
-      targetPort: 5432
+    - port: 5433
+      targetPort: 5433
   selector:
     app: postgres
 ---
