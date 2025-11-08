@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: order-001
+      author: a.kikonkov
+      changes:
+        - sql:
+            sql: "CREATE SCHEMA IF NOT EXISTS orders;"
+        - createTable:
+            schemaName: orders
+            tableName: rental_order
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: UUID
+              - column:
+                  name: hold_id
+                  type: UUID
+              - column:
+                  name: status
+                  type: VARCHAR(30)
+              - column:
+                  name: total_amount
+                  type: NUMERIC(10,2)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP

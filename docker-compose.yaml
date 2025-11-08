@@ -8,7 +8,7 @@ services:
       POSTGRES_DB: boardbox
     volumes:
       - db_data:/var/lib/postgresql/data
-      - ./services/boardbox_catalog/src/main/resources/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./db/init-orders.sql:/docker-entrypoint-initdb.d/01-init-orders.sql:ro
     ports:
       - "5433:5432"
     healthcheck:
@@ -70,6 +70,37 @@ services:
       - "8025:8025"
     networks:
       - boardnet
+
+  order:
+    build:
+      context: ./services/order-service
+      dockerfile: Dockerfile
+    container_name: boardbox_order
+    depends_on:
+      db:
+        condition: service_healthy
+      rabbit:
+        condition: service_healthy
+    environment:
+      SPRING_R2DBC_URL: r2dbc:postgresql://db:5432/boardbox?currentSchema=orders
+      SPRING_R2DBC_USERNAME: postgres
+      SPRING_R2DBC_PASSWORD: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/boardbox?currentSchema=orders
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_RABBITMQ_HOST: rabbit
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8083:8083"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    #  - ./services/order-service/src/main/resources/db/init-orders.sql:/docker-entrypoint-initdb.d/02-init-orders.sql:ro
+    networks:
+      - boardnet
+    restart: unless-stopped
 
   catalog:
     build:

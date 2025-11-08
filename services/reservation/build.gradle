@@ -8,8 +8,6 @@ group = 'com.demoy'
 version = '0.0.1-SNAPSHOT'
 description = 'reservation'
 
-
-
 repositories {
     mavenCentral()
 }
@@ -19,7 +17,7 @@ dependencies {
     implementation 'org.springframework:spring-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
-    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.1.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.8.13'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     compileOnly 'org.projectlombok:lombok'

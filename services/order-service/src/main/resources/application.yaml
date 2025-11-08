@@ -1,0 +1,36 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: order-service
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5433/boardbox?currentSchema=orders
+    username: postgres
+    password: postgres
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/boardbox?currentSchema=orders
+    username: postgres
+    password: postgres
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/order-master.yaml
+    default-schema: orders
+
+  rabbitmq:
+    host: rabbit
+    port: 5672
+    username: guest
+    password: guest
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    org.springframework.r2dbc: INFO

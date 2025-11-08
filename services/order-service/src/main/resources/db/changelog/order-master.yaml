@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/order-001-schema.yaml
+  - include:
+      file: db/changelog/order-002-outbox.yaml

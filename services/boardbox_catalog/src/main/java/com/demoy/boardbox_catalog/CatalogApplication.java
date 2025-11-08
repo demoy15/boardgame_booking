@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CatalogApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CatalogApplication.class, args);
+        var ctx = SpringApplication.run(CatalogApplication.class, args);
+        System.out.println("DataSource beans: " + ctx.getBeanNamesForType(javax.sql.DataSource.class).length);
     }
 
 }

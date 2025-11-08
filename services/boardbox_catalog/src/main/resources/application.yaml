@@ -2,16 +2,19 @@ server:
   port: 8081
 spring:
   application:
-    name: catalog-svc
+    name: boardbox_catalog
   r2dbc:
     url: r2dbc:postgresql://db:5433/boardbox
     username: postgres
     password: postgres
-  sql:
-    init:
-      mode: always
+  datasource:
+    url: jdbc:postgresql://db:5433/boardbox
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
   liquibase:
-    enabled: false
+    enabled: true
+    change-log: classpath:db/changelog/catalog-master.yaml
 
 springdoc:
   api-docs:

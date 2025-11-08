@@ -1,0 +1,8 @@
+CREATE SCHEMA IF NOT EXISTS orders;
+GRANT
+USAGE
+ON
+SCHEMA
+orders TO postgres;
+GRANT CREATE
+ON SCHEMA orders TO postgres;

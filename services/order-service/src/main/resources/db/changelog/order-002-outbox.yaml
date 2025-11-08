@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: order-002
+      author: a.kikonkov
+      changes:
+        - createTable:
+            schemaName: orders
+            tableName: outbox
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: aggregate_type
+                  type: VARCHAR(100)
+              - column:
+                  name: aggregate_id
+                  type: UUID
+              - column:
+                  name: event_type
+                  type: VARCHAR(100)
+              - column:
+                  name: payload
+                  type: JSONB
+              - column:
+                  name: published
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: published_at
+                  type: TIMESTAMP

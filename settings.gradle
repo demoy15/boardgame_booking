@@ -1,7 +1,12 @@
 rootProject.name = 'boardGameBooking'
 
+include 'services:order-service'
 include 'services:boardbox_catalog'
 include 'services:reservation'
 
-project(':services:boardbox_catalog').name = 'boardbox_catalog'
-project(':services:reservation').name = 'reservation'
+project(':services:order-service').projectDir = file('services/order-service')
+project(':services:boardbox_catalog').projectDir = file('services/boardbox_catalog')
+project(':services:reservation').projectDir = file('services/reservation')
+
+
+

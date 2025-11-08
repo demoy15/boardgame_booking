@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: catalog-001
+      author: a.kikonkov
+      changes:
+        - createTable:
+            tableName: game
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: title
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: min_players
+                  type: INT
+              - column:
+                  name: max_players
+                  type: INT
+              - column:
+                  name: playtime_min
+                  type: INT

@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: catalog-002
+      author: a.kikonkov
+      changes:
+        - createTable:
+            tableName: branch
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(120)
+              - column:
+                  name: address
+                  type: VARCHAR(300)
+
+        - createTable:
+            tableName: inventory_item
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: game_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: branch_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(20)
+                  defaultValue: 'AVAILABLE'
+
+        - addForeignKeyConstraint:
+            baseTableName: inventory_item
+            baseColumnNames: game_id
+            referencedTableName: game
+            referencedColumnNames: id
+            constraintName: fk_inventory_item_game
+
+        - addForeignKeyConstraint:
+            baseTableName: inventory_item
+            baseColumnNames: branch_id
+            referencedTableName: branch
+            referencedColumnNames: id
+            constraintName: fk_inventory_item_branch
