@@ -16,7 +16,7 @@ public class EventPublisher {
     public void publishInventoryHeld(Object event) {
         try {
             String payload = mapper.writeValueAsString(event);
-            rabbit.convertAndSend(RabbitConfig.DOMAIN_EVENTS, "inventory.held", payload);
+            rabbit.convertAndSend(RabbitConfig.DOMAIN_EXCHANGE, "inventory.held", payload);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -25,7 +25,7 @@ public class EventPublisher {
     public void publishInventoryExpired(Object event) {
         try {
             String payload = mapper.writeValueAsString(event);
-            rabbit.convertAndSend(RabbitConfig.DOMAIN_EVENTS, "inventory.expired", payload);
+            rabbit.convertAndSend(RabbitConfig.DOMAIN_EXCHANGE, "inventory.expired", payload);
         } catch (Exception e) {
             e.printStackTrace();
         }

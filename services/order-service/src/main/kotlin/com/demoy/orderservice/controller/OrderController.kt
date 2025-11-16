@@ -1,10 +1,8 @@
 package com.demoy.orderservice.controller
 
 import com.demoy.orderservice.service.OrderService
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
 import java.util.*
 
@@ -20,5 +18,12 @@ class OrderController(private val service: OrderService) {
         val holdId = UUID.fromString(req.holdId)
         val userId = UUID.fromString(req.userId)
         return service.createOrder(holdId, userId).map { CreateOrderResponse(it.toString()) }
+    }
+
+    @PostMapping("/{orderId}/cancel")
+    fun cancelOrder(@PathVariable orderId: String): Mono<ResponseEntity<Void>> {
+        val oid = UUID.fromString(orderId)
+        return service.cancelOrder(oid)
+            .then(Mono.fromCallable { ResponseEntity.noContent().build() })
     }
 }

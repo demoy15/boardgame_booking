@@ -53,7 +53,7 @@ services:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
     ports:
-      - "5673:5673"
+      - "5673:5672"
       - "15673:15673"
     healthcheck:
       test: [ "CMD", "rabbitmq-diagnostics", "status" ]

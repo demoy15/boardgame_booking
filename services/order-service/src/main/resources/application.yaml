@@ -20,8 +20,8 @@ spring:
     default-schema: orders
 
   rabbitmq:
-    host: rabbit
-    port: 5672
+    host: localhost
+    port: 5673
     username: guest
     password: guest
 
@@ -31,6 +31,15 @@ springdoc:
   api-docs:
     path: /v3/api-docs
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
 logging:
   level:
-    org.springframework.r2dbc: INFO
+    org.springframework.data.r2dbc: DEBUG

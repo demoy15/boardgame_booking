@@ -23,7 +23,7 @@ databaseChangeLog:
                   type: VARCHAR(100)
               - column:
                   name: payload
-                  type: JSONB
+                  type: VARCHAR
               - column:
                   name: published
                   type: BOOLEAN
