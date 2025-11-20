@@ -11,10 +11,10 @@ export default function HoldForm({game, onCreated, onCancel}) {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
+
     const submit = async (e) => {
         e.preventDefault()
         setLoading(true)
-        setError(null)
         try {
             const body = {
                 inventoryId: game.id,
@@ -30,6 +30,7 @@ export default function HoldForm({game, onCreated, onCancel}) {
             setLoading(false)
         }
     }
+
 
     return (
         <div className="modal">

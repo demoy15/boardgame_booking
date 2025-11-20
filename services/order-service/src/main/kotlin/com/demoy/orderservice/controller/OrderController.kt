@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
 import java.util.*
 
-data class CreateOrderRequest(val holdId: String, val userId: String)
+data class CreateOrderRequest(val holdIds: List<String>, val userId: String)
 data class CreateOrderResponse(val orderId: String)
 
 @RestController
@@ -15,9 +15,9 @@ class OrderController(private val service: OrderService) {
 
     @PostMapping
     fun create(@RequestBody req: CreateOrderRequest): Mono<CreateOrderResponse> {
-        val holdId = UUID.fromString(req.holdId)
+        val holdIds = req.holdIds.map { UUID.fromString(it) }
         val userId = UUID.fromString(req.userId)
-        return service.createOrder(holdId, userId).map { CreateOrderResponse(it.toString()) }
+        return service.createOrder(holdIds, userId).map { CreateOrderResponse(it.toString()) }
     }
 
     @PostMapping("/{orderId}/cancel")

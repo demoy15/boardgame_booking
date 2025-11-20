@@ -19,8 +19,13 @@ public class OrderCancelledListener {
     public void onOrderCancelled(String body) {
         try {
             JsonNode node = mapper.readTree(body);
-            String holdId = node.get("holdId").asText();
-            holdService.cancelHold(holdId).subscribe();
+            JsonNode holdIds = node.get("holdIds");
+            if (holdIds != null && holdIds.isArray()) {
+                for (JsonNode h : holdIds) {
+                    String holdId = h.asText();
+                    holdService.cancelHold(holdId).subscribe();
+                }
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

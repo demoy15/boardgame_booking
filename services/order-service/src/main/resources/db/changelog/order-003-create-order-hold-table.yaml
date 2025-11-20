@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: order-003-create-order-hold-table
+      author: a.kikonkov
+      changes:
+        - createTable:
+            schemaName: orders
+            tableName: rental_order_hold
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: order_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: hold_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: rental_order_hold
+            baseColumnNames: order_id
+            referencedTableName: rental_order
+            referencedColumnNames: id
+            baseTableSchemaName: orders
+            referencedTableSchemaName: orders
+            constraintName: fk_order_hold_order
+        - createIndex:
+            schemaName: orders
+            tableName: rental_order_hold
+            indexName: idx_rental_order_hold_order
+            columns:
+              - column:
+                  name: order_id

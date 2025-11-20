@@ -11,7 +11,6 @@ data class RentalOrder(
     @Id
     val id: UUID? = null,
     val userId: UUID,
-    val holdId: UUID,
     val status: OrderStatus,
     val totalAmount: BigDecimal = BigDecimal.ZERO,
     val createdAt: LocalDateTime = LocalDateTime.now()

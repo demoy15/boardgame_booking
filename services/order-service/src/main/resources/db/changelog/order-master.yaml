@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/order-001-schema.yaml
   - include:
       file: db/changelog/order-002-outbox.yaml
+  - include:
+      file: db/changelog/order-003-create-order-hold-table.yaml

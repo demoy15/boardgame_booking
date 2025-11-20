@@ -2,6 +2,7 @@ import React from 'react'
 import {Link, Route, Routes} from 'react-router-dom'
 import Games from './components/Games'
 import Orders from './components/Orders'
+import Cart from './components/Cart'
 
 export default function App() {
     return (
@@ -11,6 +12,7 @@ export default function App() {
                     <h1 className="logo">BoardBox</h1>
                     <nav>
                         <Link to="/">Games</Link>
+                        <Link to="/cart">Cart</Link>
                         <Link to="/orders">Orders</Link>
                     </nav>
                 </div>
@@ -19,6 +21,7 @@ export default function App() {
             <main className="container">
                 <Routes>
                     <Route path="/" element={<Games/>}/>
+                    <Route path="/cart" element={<Cart/>}/>
                     <Route path="/orders" element={<Orders/>}/>
                 </Routes>
             </main>
