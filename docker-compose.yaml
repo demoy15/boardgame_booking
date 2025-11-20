@@ -149,6 +149,21 @@ services:
       - boardnet
     restart: unless-stopped
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: boardbox_frontend
+    depends_on:
+      - catalog
+      - reservation
+      - order
+    ports:
+      - "3000:80"
+    networks:
+      - boardnet
+    restart: unless-stopped
+
 volumes:
   db_data:
   redisinsight_data:
