@@ -1,10 +1,9 @@
 FROM gradle:8.10-jdk21-alpine AS build
 WORKDIR /app
 COPY . .
-RUN gradle clean bootJar -x test \
-    && cp "$(ls -1 build/libs/*.jar | grep -v -- '-plain\.jar$' | head -n 1)" /app/app.jar
+RUN gradle clean bootJar -x test
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY --from=build /app/app.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY --from=build /app/build/libs/app.jar /app/app.jar
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
