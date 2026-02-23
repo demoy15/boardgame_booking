@@ -15,7 +15,17 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.math.BigDecimal
 import java.time.LocalDateTime
+import java.util.NoSuchElementException
 import java.util.*
+
+data class OrderDetails(
+    val orderId: UUID,
+    val userId: UUID,
+    val status: OrderStatus,
+    val totalAmount: BigDecimal,
+    val createdAt: LocalDateTime,
+    val holdIds: List<UUID>
+)
 
 @Service
 class OrderService(
@@ -53,7 +63,6 @@ class OrderService(
             payload = payload
         )
 
-
         val saveSequence: Mono<Void> = r2dbcEntityTemplate.insert(order)
             .flatMap { savedOrder ->
                 Flux.fromIterable(holdIds)
@@ -74,15 +83,32 @@ class OrderService(
             .then(Mono.just(orderId))
     }
 
+    fun getOrderById(orderId: UUID): Mono<OrderDetails> {
+        return orderRepo.findById(orderId)
+            .switchIfEmpty(Mono.error(NoSuchElementException("order not found")))
+            .flatMap { toDetails(it) }
+    }
+
+    fun listOrders(userId: UUID?, status: OrderStatus?): Flux<OrderDetails> {
+        var criteria: Criteria? = null
+        if (userId != null) {
+            criteria = Criteria.where("user_id").`is`(userId)
+        }
+        if (status != null) {
+            val statusCriteria = Criteria.where("status").`is`(status)
+            criteria = criteria?.and(statusCriteria) ?: statusCriteria
+        }
+
+        val query = criteria?.let { Query.query(it) } ?: Query.empty()
+
+        return r2dbcEntityTemplate.select(query, RentalOrder::class.java)
+            .flatMap { toDetails(it) }
+    }
+
     fun cancelOrder(orderId: UUID): Mono<Void> {
         return orderRepo.findById(orderId)
             .flatMap { order ->
-                val holdsMono: Mono<List<UUID>> = r2dbcEntityTemplate.select(
-                    Query.query(Criteria.where("order_id").`is`(orderId)),
-                    RentalOrderHold::class.java
-                )
-                    .map { it.holdId }
-                    .collectList()
+                val holdsMono: Mono<List<UUID>> = getHoldIds(orderId)
 
                 holdsMono.flatMap { holdIds ->
                     val canceled = order.copy(status = OrderStatus.CANCELLED)
@@ -107,6 +133,30 @@ class OrderService(
                     txOp.execute { txWork }.then()
                 }
             }
-            .switchIfEmpty(Mono.error(RuntimeException("order not found")))
+            .switchIfEmpty(Mono.error(NoSuchElementException("order not found")))
+    }
+
+    private fun toDetails(order: RentalOrder): Mono<OrderDetails> {
+        val orderId = order.id ?: return Mono.error(RuntimeException("order id is missing"))
+        return getHoldIds(orderId)
+            .map { holdIds ->
+                OrderDetails(
+                    orderId = orderId,
+                    userId = order.userId,
+                    status = order.status,
+                    totalAmount = order.totalAmount,
+                    createdAt = order.createdAt,
+                    holdIds = holdIds
+                )
+            }
+    }
+
+    private fun getHoldIds(orderId: UUID): Mono<List<UUID>> {
+        return r2dbcEntityTemplate.select(
+            Query.query(Criteria.where("order_id").`is`(orderId)),
+            RentalOrderHold::class.java
+        )
+            .map { it.holdId }
+            .collectList()
     }
 }
