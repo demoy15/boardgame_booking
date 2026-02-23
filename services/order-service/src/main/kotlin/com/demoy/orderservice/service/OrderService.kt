@@ -99,7 +99,7 @@ class OrderService(
             criteria = criteria?.and(statusCriteria) ?: statusCriteria
         }
 
-        val query = if (criteria == null) Query.empty() else Query.query(criteria)
+        val query = criteria?.let { Query.query(it) } ?: Query.empty()
 
         return r2dbcEntityTemplate.select(query, RentalOrder::class.java)
             .flatMap { toDetails(it) }
