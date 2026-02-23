@@ -43,3 +43,12 @@ kotlin {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    archiveFileName.set("app.jar")
+}
+
+tasks.named<org.gradle.jvm.tasks.Jar>("jar") {
+    enabled = false
+}
