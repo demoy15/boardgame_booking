@@ -3,6 +3,8 @@ import {Link, Route, Routes} from 'react-router-dom'
 import Games from './components/Games'
 import Orders from './components/Orders'
 import Cart from './components/Cart'
+import Users from './components/Users'
+import UserOrders from './components/UserOrders'
 
 export default function App() {
     return (
@@ -14,6 +16,8 @@ export default function App() {
                         <Link to="/">Games</Link>
                         <Link to="/cart">Cart</Link>
                         <Link to="/orders">Orders</Link>
+                        <Link to="/users">Users</Link>
+                        <Link to="/user-orders">User Orders</Link>
                     </nav>
                 </div>
             </header>
@@ -23,6 +27,8 @@ export default function App() {
                     <Route path="/" element={<Games/>}/>
                     <Route path="/cart" element={<Cart/>}/>
                     <Route path="/orders" element={<Orders/>}/>
+                    <Route path="/users" element={<Users/>}/>
+                    <Route path="/user-orders" element={<UserOrders/>}/>
                 </Routes>
             </main>
 

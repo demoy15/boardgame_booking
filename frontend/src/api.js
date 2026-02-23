@@ -81,6 +81,32 @@ export const cancelOrder = (orderId) =>
 
 export const listOrders = (params) => request('/api/orders', {params})
 
+// User API
+export const getUsers = () => request('/api/users')
+
+export const getUser = (userId) => request(`/api/users/${userId}`)
+
+export const getUserByUsername = (username) => request(`/api/users/username/${username}`)
+
+export const createUser = (body) => request('/api/users', {method: 'POST', body})
+
+export const updateUser = (userId, body) => request(`/api/users/${userId}`, {method: 'PUT', body})
+
+export const deleteUser = (userId) => request(`/api/users/${userId}`, {method: 'DELETE'})
+
+// User Orders API
+export const getUserOrders = (userId) => request(`/api/user-orders/user/${userId}`)
+
+export const getUserOrder = (orderId) => request(`/api/user-orders/${orderId}`)
+
+export const createUserOrder = (body) => request('/api/user-orders', {method: 'POST', body})
+
+export const updateUserOrderStatus = (orderId, status) => 
+    request(`/api/user-orders/${orderId}/status?status=${status}`, {method: 'PUT'})
+
+export const cancelUserOrder = (orderId) => 
+    request(`/api/user-orders/${orderId}/cancel`, {method: 'POST'})
+
 const api = {
     getGames,
     getGame,
@@ -90,7 +116,20 @@ const api = {
     createOrder,
     getOrder,
     cancelOrder,
-    listOrders
+    listOrders,
+    // User API
+    getUsers,
+    getUser,
+    getUserByUsername,
+    createUser,
+    updateUser,
+    deleteUser,
+    // User Orders API
+    getUserOrders,
+    getUserOrder,
+    createUserOrder,
+    updateUserOrderStatus,
+    cancelUserOrder
 }
 
 export default api
