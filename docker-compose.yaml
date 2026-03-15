@@ -134,6 +134,8 @@ services:
         condition: service_healthy
       rabbit:
         condition: service_healthy
+      catalog:
+        condition: service_started
     environment:
       SPRING_REDIS_HOST: redis
       SPRING_REDIS_PORT: 6379
@@ -142,6 +144,7 @@ services:
       SPRING_RABBITMQ_USERNAME: guest
       SPRING_RABBITMQ_PASSWORD: guest
       RESERVATION_HOLD_TTL_SECONDS: 900
+      CATALOG_BASE_URL: http://catalog:8081
       SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8082:8082"

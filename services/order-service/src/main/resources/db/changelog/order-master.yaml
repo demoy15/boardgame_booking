@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db/changelog/order-002-outbox.yaml
   - include:
       file: db/changelog/order-003-create-order-hold-table.yaml
+  - include:
+      file: db/changelog/order-004-users.yaml

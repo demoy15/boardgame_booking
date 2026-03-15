@@ -1,8 +1,10 @@
 package com.demoy.boardbox_catalog.service;
 
 import com.demoy.boardbox_catalog.dto.GameDto;
+import com.demoy.boardbox_catalog.dto.InventoryItemDto;
 import com.demoy.boardbox_catalog.model.GameEntity;
 import com.demoy.boardbox_catalog.repository.GameRepository;
+import com.demoy.boardbox_catalog.repository.InventoryItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ public class GameService {
 
     private final GameRepository repo;
     private final R2dbcEntityTemplate template;
+    private final InventoryItemRepository inventoryRepo;
 
     public Flux<GameDto> getAll() {
         return repo.findAll()
@@ -36,5 +39,10 @@ public class GameService {
     public Mono<GameDto> getById(UUID id) {
         return repo.findById(id)
                 .map(e -> new GameDto(e.getId(), e.getTitle(), e.getMinPlayers(), e.getMaxPlayers(), e.getPlaytimeMin()));
+    }
+
+    public Flux<InventoryItemDto> getInventoryByGameId(UUID gameId) {
+        return inventoryRepo.findAllByGameId(gameId)
+                .map(i -> new InventoryItemDto(i.getId(), i.getGameId(), i.getBranchId(), i.getStatus()));
     }
 }

@@ -14,6 +14,7 @@ import java.util.UUID;
 @Builder
 public class HoldRequest {
     private UUID inventoryId;
+    private UUID gameId;
     private LocalDateTime from;
     private LocalDateTime to;
     private UUID userId;

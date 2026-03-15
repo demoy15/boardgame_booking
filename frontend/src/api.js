@@ -81,6 +81,11 @@ export const cancelOrder = (orderId) =>
 
 export const listOrders = (params) => request('/api/orders', {params})
 
+export const createUser = (body) => request('/api/users', {method: 'POST', body})
+
+export const getUser = (userId) => request(`/api/users/${userId}`)
+export const getUserByEmail = (email) => request('/api/users', {params: {email}})
+
 const api = {
     getGames,
     getGame,
@@ -90,7 +95,10 @@ const api = {
     createOrder,
     getOrder,
     cancelOrder,
-    listOrders
+    listOrders,
+    createUser,
+    getUser,
+    getUserByEmail
 }
 
 export default api

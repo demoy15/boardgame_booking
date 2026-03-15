@@ -2,6 +2,7 @@ package com.demoy.boardbox_catalog.controller;
 
 
 import com.demoy.boardbox_catalog.dto.GameDto;
+import com.demoy.boardbox_catalog.dto.InventoryItemDto;
 import com.demoy.boardbox_catalog.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +31,10 @@ public class BoardGameController {
     @GetMapping("/games/{id}")
     public Mono<GameDto> getById(@PathVariable UUID id) {
         return service.getById(id);
+    }
+
+    @GetMapping("/games/{id}/inventory")
+    public Flux<InventoryItemDto> getInventory(@PathVariable UUID id) {
+        return service.getInventoryByGameId(id);
     }
 }

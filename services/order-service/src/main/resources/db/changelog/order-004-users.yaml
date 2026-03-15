@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: order-004-users
+      author: codex
+      changes:
+        - createTable:
+            schemaName: orders
+            tableName: app_user
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(120)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(200)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+        - createIndex:
+            schemaName: orders
+            tableName: app_user
+            indexName: idx_app_user_email
+            unique: true
+            columns:
+              - column:
+                  name: email

@@ -1,0 +1,336 @@
+databaseChangeLog:
+  - changeSet:
+      id: catalog-004-top10
+      author: codex
+      changes:
+        - insert:
+            tableName: game
+            columns:
+              - column: { name: id, value: 'bea058c6-77da-4c83-8c4f-54efe77bc546' }
+              - column: { name: title, value: 'Brass: Birmingham' }
+        - insert:
+            tableName: game
+            columns:
+              - column: { name: id, value: '19562844-c1a9-450c-bc8a-cce6f65f3294' }
+              - column: { name: title, value: 'Ark Nova' }
+        - insert:
+            tableName: game
+            columns:
+              - column: { name: id, value: 'abe1bedd-8849-4641-9ca1-9fbc1aa29687' }
+              - column: { name: title, value: 'Pandemic Legacy: Season 1' }
+        - insert:
+            tableName: game
+            columns:
+              - column: { name: id, value: '1672590a-6682-428a-abe1-9f019cf3112c' }
+              - column: { name: title, value: 'Gloomhaven' }
+        - insert:
+            tableName: game
+            columns:
+              - column: { name: id, value: '61049420-f546-456e-9e09-6a450a822c92' }
+              - column: { name: title, value: 'Dune: Imperium - Uprising' }
+        - insert:
+            tableName: game
+            columns:
+              - column: { name: id, value: '5ef0043f-5fb4-4a10-a287-0d130ea31b25' }
+              - column: { name: title, value: 'Dune: Imperium' }
+        - insert:
+            tableName: game
+            columns:
+              - column: { name: id, value: '39429e23-ea04-4d3c-8389-c969d8d19eb2' }
+              - column: { name: title, value: 'Twilight Imperium: Fourth Edition' }
+        - insert:
+            tableName: game
+            columns:
+              - column: { name: id, value: '2907d2b4-9695-4da7-839b-ff58766de0fb' }
+              - column: { name: title, value: 'War of the Ring: Second Edition' }
+        - insert:
+            tableName: game
+            columns:
+              - column: { name: id, value: 'f548ec2b-7517-4f6f-b0a2-21b55c342190' }
+              - column: { name: title, value: 'Terraforming Mars' }
+        - insert:
+            tableName: game
+            columns:
+              - column: { name: id, value: 'db3d098f-3c74-4892-ba3d-038f43c5343a' }
+              - column: { name: title, value: 'Star Wars: Rebellion' }
+
+  - changeSet:
+      id: catalog-005-branches-inventory
+      author: codex
+      changes:
+        - insert:
+            tableName: branch
+            columns:
+              - column: { name: id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: name, value: 'Downtown' }
+              - column: { name: address, value: '12 Central St.' }
+        - insert:
+            tableName: branch
+            columns:
+              - column: { name: id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: name, value: 'Riverside' }
+              - column: { name: address, value: '88 River Ave.' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'b3f7ad41-1534-449a-8b4d-d0b1e76dad47' }
+              - column: { name: game_id, value: '11111111-1111-1111-1111-111111111111' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'c27bf561-6286-443c-a0e4-84ba195f5377' }
+              - column: { name: game_id, value: '11111111-1111-1111-1111-111111111111' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '4199ea5e-9203-4268-abf0-25d1cc3052bc' }
+              - column: { name: game_id, value: '11111111-1111-1111-1111-111111111111' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '8ec12746-e540-44a0-bd6c-c0f7ce0e5983' }
+              - column: { name: game_id, value: '22222222-2222-2222-2222-222222222222' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'df2f93d7-42b3-4efe-9074-ec2f7b89b409' }
+              - column: { name: game_id, value: '22222222-2222-2222-2222-222222222222' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'f88b51b7-0ebf-4b71-a70b-72673f19c0b8' }
+              - column: { name: game_id, value: '22222222-2222-2222-2222-222222222222' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '2f4139fd-2c50-449e-a54e-220fa6a87660' }
+              - column: { name: game_id, value: 'bea058c6-77da-4c83-8c4f-54efe77bc546' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '53de45a8-6404-4f10-9180-050b3e26928c' }
+              - column: { name: game_id, value: 'bea058c6-77da-4c83-8c4f-54efe77bc546' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'a8413542-7020-40fd-9424-5d3711e48c71' }
+              - column: { name: game_id, value: 'bea058c6-77da-4c83-8c4f-54efe77bc546' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '5ce8eb64-3c17-4e05-8cec-f7eb1eae0a33' }
+              - column: { name: game_id, value: '19562844-c1a9-450c-bc8a-cce6f65f3294' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '5ac6f902-6900-4dd0-b16b-fb9abec03b1f' }
+              - column: { name: game_id, value: '19562844-c1a9-450c-bc8a-cce6f65f3294' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '9daf58a4-524d-47e1-a82a-b411c5e8a39e' }
+              - column: { name: game_id, value: '19562844-c1a9-450c-bc8a-cce6f65f3294' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '1281b430-1a74-4ba9-95d5-b170b9acaef9' }
+              - column: { name: game_id, value: 'abe1bedd-8849-4641-9ca1-9fbc1aa29687' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'b81e85ea-b95f-4417-96fe-51354d0b5aef' }
+              - column: { name: game_id, value: 'abe1bedd-8849-4641-9ca1-9fbc1aa29687' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '90a2ee24-05d5-486a-9108-6f124329909f' }
+              - column: { name: game_id, value: 'abe1bedd-8849-4641-9ca1-9fbc1aa29687' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'f3bdcf98-b082-4a58-86e7-5743d0c09f93' }
+              - column: { name: game_id, value: '1672590a-6682-428a-abe1-9f019cf3112c' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'a9284915-2e95-475c-942e-9876d4650452' }
+              - column: { name: game_id, value: '1672590a-6682-428a-abe1-9f019cf3112c' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '87405b30-311f-4527-8cae-93660ddda307' }
+              - column: { name: game_id, value: '1672590a-6682-428a-abe1-9f019cf3112c' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '04013255-d41b-4491-9757-104ca6cdfd6f' }
+              - column: { name: game_id, value: '61049420-f546-456e-9e09-6a450a822c92' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'ad9a406a-5e1b-4d2e-9016-5e8ac2c0fdb6' }
+              - column: { name: game_id, value: '61049420-f546-456e-9e09-6a450a822c92' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '280bb91e-6bd0-4e91-a9e8-807c61e1ee98' }
+              - column: { name: game_id, value: '61049420-f546-456e-9e09-6a450a822c92' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '22ca37e1-cd13-4bad-8f56-8b3020d90135' }
+              - column: { name: game_id, value: '5ef0043f-5fb4-4a10-a287-0d130ea31b25' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'b0a31936-b73b-4d5f-bd8e-5cb04d198f75' }
+              - column: { name: game_id, value: '5ef0043f-5fb4-4a10-a287-0d130ea31b25' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '1be3d80a-8991-4f7e-8b7e-2115413cc4c8' }
+              - column: { name: game_id, value: '5ef0043f-5fb4-4a10-a287-0d130ea31b25' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '5bdc9e04-e3a5-4896-bc68-4fff9b683899' }
+              - column: { name: game_id, value: '39429e23-ea04-4d3c-8389-c969d8d19eb2' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '3d4904e6-cbcf-462d-93f4-84ffc173dbfd' }
+              - column: { name: game_id, value: '39429e23-ea04-4d3c-8389-c969d8d19eb2' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '7bfd3b7b-b51c-4805-90e8-bed5047daa00' }
+              - column: { name: game_id, value: '39429e23-ea04-4d3c-8389-c969d8d19eb2' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'fbaf9316-e97a-41b9-bf4e-bd4e86b0cb22' }
+              - column: { name: game_id, value: '2907d2b4-9695-4da7-839b-ff58766de0fb' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'd3f776d1-7255-41c5-be1f-5ac9e8697a93' }
+              - column: { name: game_id, value: '2907d2b4-9695-4da7-839b-ff58766de0fb' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'c0586158-7928-45fc-b0ff-01b724294b10' }
+              - column: { name: game_id, value: '2907d2b4-9695-4da7-839b-ff58766de0fb' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '361243f1-1315-41e5-acc5-a5b7bffb8bed' }
+              - column: { name: game_id, value: 'f548ec2b-7517-4f6f-b0a2-21b55c342190' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '8e2d44b3-ef3a-4256-9db6-81ed947b2ac7' }
+              - column: { name: game_id, value: 'f548ec2b-7517-4f6f-b0a2-21b55c342190' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '586af73f-7e8b-4a36-90e6-ebd12ad6e952' }
+              - column: { name: game_id, value: 'f548ec2b-7517-4f6f-b0a2-21b55c342190' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: 'b04c397d-350a-4d59-bf11-2a38cab42059' }
+              - column: { name: game_id, value: 'db3d098f-3c74-4892-ba3d-038f43c5343a' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '59e728b0-97cf-4b34-be89-4142d1b91ec5' }
+              - column: { name: game_id, value: 'db3d098f-3c74-4892-ba3d-038f43c5343a' }
+              - column: { name: branch_id, value: '15161bcf-c5a1-4924-b7fe-fc77dd41bc12' }
+              - column: { name: status, value: 'AVAILABLE' }
+        - insert:
+            tableName: inventory_item
+            columns:
+              - column: { name: id, value: '06b149b0-1de6-4ad0-948f-420783775ed7' }
+              - column: { name: game_id, value: 'db3d098f-3c74-4892-ba3d-038f43c5343a' }
+              - column: { name: branch_id, value: 'b269ed9f-15a2-4104-926d-b85806737b1f' }
+              - column: { name: status, value: 'AVAILABLE' }

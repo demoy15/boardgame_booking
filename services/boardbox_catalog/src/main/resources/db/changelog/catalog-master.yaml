@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db/changelog/catalog-002-branches-inventory.yaml
   - include:
       file: db/changelog/catalog-003-seed.yaml
+  - include:
+      file: db/changelog/catalog-004-top10-and-inventory.yaml
